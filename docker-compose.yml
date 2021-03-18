@@ -2,11 +2,13 @@ version: "2"
 
 services:
   db-container:
+    container_name: my-pm-db-container
     image: busybox
     volumes:
-      - db-volume:/var/lib/mysql/
+      - my-pm-db-volume:/var/lib/mysql/
 
   mysql-container:
+    container_name: my-pm-mariadb
     image: mariadb
     environment:
       - MYSQL_ROOT_PASSWORD=root_password
@@ -19,6 +21,7 @@ services:
     restart: always
 
   redmine-container:
+    container_name: my-pm-redmine
     image: redmine:4.1-passenger
     volumes:
       - ./Redmine/repos:/opt/repos
@@ -38,4 +41,4 @@ services:
     user: www-data:www-data
 
 volumes:
-  db-volume:
+  my-pm-db-volume:
