@@ -1,0 +1,2 @@
+# my_docker_redmine
+個人用redmineの設定ファイル等を保存するrepository。redmineは公式のimageを利用。
