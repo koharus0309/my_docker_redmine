@@ -1,0 +1,41 @@
+version: "2"
+
+services:
+  db-container:
+    image: busybox
+    volumes:
+      - db-volume:/var/lib/mysql/
+
+  mysql-container:
+    image: mariadb
+    environment:
+      - MYSQL_ROOT_PASSWORD=root_password
+      - MYSQL_DATABASE=redmine # これは不要な気がする
+    command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+    volumes_from:
+      - db-container
+    depends_on:
+      - db-container
+    restart: always
+
+  redmine-container:
+    image: redmine:4.1-passenger
+    volumes:
+      - ./Redmine/repos:/opt/repos
+      - ./Redmine/scm.yml:/usr/src/redmine/config/scm.yml
+    environment: 
+      - REDMINE_DB_MYSQL=mysql-container
+      - REDMINE_DB_USERNAME=root
+      - REDMINE_DB_PASSWORD=root_password
+    ports:
+      - 3000:3000
+    # expose:
+    #   - "3000"
+    depends_on:
+      - mysql-container
+    restart: always
+    # host側のapacheによるrepositoryの通信を行うことを想定。
+    user: www-data:www-data
+
+volumes:
+  db-volume:

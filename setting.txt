@@ -1,0 +1,2 @@
+現状では、redmineのdocker containerに、docker-compose up -dした後に、scm creatorをインストールしている。
+これを、Dockerfileを用いて自動ビルドしたい。

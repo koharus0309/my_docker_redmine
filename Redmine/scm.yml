@@ -1,0 +1,27 @@
+production:
+  deny_delete: false
+  auto_create: true
+  allow_add_local: true
+  svn:
+    path: /opt/repos/svn
+    svnadmin: /usr/bin/svnadmin
+    url: https://localhost/svn
+  git:
+    path: /opt/repos/git
+    git: /usr/bin/git
+    options: --bare
+    url: https://localhost/git
+    update_server_info: true
+    git_ext: true
+  mercurial:
+    path: /opt/repos/mercurial
+    hg: /usr/bin/mercurial
+    url: https://localhost/mercurial
+  bazaar:
+    path: /opt/repos/bazaar
+    bzr: /usr/bin/bazaar
+    init: init-repository
+    log_encoding: UTF-8
+    url: https://localhost/bazaar
+ 
+development:
